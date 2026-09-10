@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070d1d"><title>تحدي البرق | لعبك</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="index.html"><span class="logo-mark">🎮</span><span>لعبك</span></a>
+  <div class="nav-actions"><a class="btn ghost" href="index.html">خروج</a></div>
+</header>
+<main class="solo-page wrap" id="soloGame"></main>
+<script src="app.js"></script>
+<script>
+(function(){
+  const root=document.getElementById('soloGame');
+  const questions=[
+    ['ما عاصمة السعودية؟',['الرياض','جدة','أبها','الطائف'],0],
+    ['كم عدد أيام الأسبوع؟',['5','6','7','8'],2],
+    ['أي كوكب يُعرف بالكوكب الأحمر؟',['الزهرة','المريخ','المشتري','عطارد'],1],
+    ['كم دقيقة في الساعة؟',['30','45','60','90'],2],
+    ['ما أكبر محيط على الأرض؟',['الأطلسي','الهندي','الهادئ','المتجمد الشمالي'],2],
+    ['كم ضلعًا للمثلث؟',['2','3','4','5'],1],
+    ['أي حيوان يُعرف بسفينة الصحراء؟',['الحصان','الجمل','الفيل','الذئب'],1],
+    ['ما ناتج 9 × 7؟',['56','63','72','79'],1],
+    ['أي لون ينتج من خلط الأزرق والأصفر؟',['أحمر','أخضر','بنفسجي','برتقالي'],1],
+    ['كم شهرًا في السنة؟',['10','11','12','13'],2]
+  ];
+  let state={i:0,score:0,streak:0,best:0,ends:0,locked:false,questions:[]};
+  try{state.best=Number(localStorage.getItem('la3bak_solo_best')||0)}catch{}
+  function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+  function start(){state={i:0,score:0,streak:0,best:state.best,ends:Date.now()+12000,locked:false,questions:shuffle(questions)};render();tick()}
+  function finish(){state.locked=true;try{if(state.score>state.best){state.best=state.score;localStorage.setItem('la3bak_solo_best',String(state.best))}}catch{};renderResult()}
+  function render(){const q=state.questions[state.i];if(!q)return finish();root.innerHTML=`<section class="solo-head"><span class="pill">⚡ لعبة فردية</span><h1>تحدي البرق</h1><p>جاوب بسرعة وحاول تحطم أفضل نتيجة لك.</p><div class="solo-stats"><span>السؤال <b>${state.i+1}/10</b></span><span>النقاط <b>${state.score}</b></span><span>السلسلة 🔥 <b>${state.streak}</b></span><span>الوقت <b id="soloTimer">12</b>ث</span></div></section><section class="solo-card"><div class="progress"><span style="width:${((state.i)/10)*100}%"></span></div><h2>${esc(q[0])}</h2><div class="solo-answers">${q[1].map((a,i)=>`<button class="solo-answer" data-i="${i}" type="button">${esc(a)}</button>`).join('')}</div><p id="soloMsg" class="muted">كلما أسرعت، أخذت نقاطًا أكثر.</p></section>`;root.querySelectorAll('.solo-answer').forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.i))))}
+  function answer(choice){if(state.locked)return;state.locked=true;const q=state.questions[state.i];const correct=choice===q[2];const remaining=Math.max(0,state.ends-Date.now());const bonus=Math.min(50,Math.floor(remaining/250));if(correct){state.streak++;state.score+=100+bonus+(state.streak>=3?50:0)}else state.streak=0;root.querySelectorAll('.solo-answer').forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add('correct');if(i===choice&&!correct)b.classList.add('wrong')});const msg=root.querySelector('#soloMsg');if(msg)msg.textContent=correct?`إجابة صحيحة! +${100+bonus+(state.streak>=3?50:0)} نقطة 🎉`:'إجابة خاطئة 😅';setTimeout(()=>{state.i++;state.locked=false;if(state.i>=10)finish();else{state.ends=Date.now()+12000;render();tick()}},650)}
+  let timerId=null;function tick(){clearInterval(timerId);timerId=setInterval(()=>{const el=document.getElementById('soloTimer');if(!el){clearInterval(timerId);return}const sec=Math.max(0,Math.ceil((state.ends-Date.now())/1000));el.textContent=sec;if(sec<=0&&!state.locked){clearInterval(timerId);state.locked=true;root.querySelectorAll('.solo-answer').forEach(b=>b.disabled=true);const msg=document.getElementById('soloMsg');if(msg)msg.textContent='انتهى الوقت ⏰';setTimeout(()=>{state.i++;state.locked=false;if(state.i>=10)finish();else{state.ends=Date.now()+12000;render();tick()}},650)}},100)}
+  function renderResult(){clearInterval(timerId);root.innerHTML=`<section class="solo-result"><div class="result-emoji">🏆</div><span class="pill">انتهى التحدي</span><h1>نتيجتك: ${state.score}</h1><p>${state.score>=900?'مستوى نار 🔥':state.score>=650?'ممتاز جدًا 👏':state.score>=400?'بداية قوية 💪':'جرّب مرة ثانية وحطّم رقمك 😎'}</p><div class="solo-final"><div><small>أفضل نتيجة</small><b>${state.best}</b></div><div><small>أعلى سلسلة</small><b>${state.streak}</b></div></div><div class="action-row"><button class="btn primary" id="again" type="button">العب مرة ثانية 🔄</button><a class="btn" href="index.html">الألعاب</a></div></section>`;document.getElementById('again').addEventListener('click',start)}
+  window.esc=window.esc||function(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))};
+  root.innerHTML=`<section class="solo-start"><div class="solo-icon">⚡</div><span class="pill">شخص واحد فقط</span><h1>تحدي البرق</h1><p>10 أسئلة • 12 ثانية لكل سؤال • نقاط للسرعة • حاول تحطم أفضل نتيجة لك.</p><button class="btn primary big" id="startSolo" type="button">ابدأ التحدي 🚀</button><div class="rules-card"><h2>طريقة اللعب</h2><div class="rules-list"><div><b>1</b><p>يظهر سؤال بأربع إجابات.</p></div><div><b>2</b><p>اختر بسرعة قبل انتهاء الـ12 ثانية.</p></div><div><b>3</b><p>الإجابة الصحيحة تعطي 100 نقطة + نقاط سرعة.</p></div><div><b>4</b><p>3 إجابات صحيحة متتالية = مكافأة إضافية.</p></div></div></div></section>`;
+  document.getElementById('startSolo').addEventListener('click',start);
+})();
+</script>
+</body></html>

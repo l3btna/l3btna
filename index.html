@@ -1,53 +1,23 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لعبك</title><link rel="stylesheet" href="styles.css"></head>
-<body><header class="nav"><a class="logo" href="index.html">🎮 لعبك</a><nav><a class="active" href="index.html">الرئيسية</a><a href="#games">الألعاب</a><a href="admin.html">لوحة المدير</a></nav></header>
-<button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">☰</button>
-<div class="menu-overlay" id="menuOverlay"></div>
-<aside class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-head">
-    <strong>🎮 لعبك</strong>
-    <button class="menu-close" id="menuClose" aria-label="إغلاق">×</button>
-  </div>
-  <div class="menu-account" id="menuAccount">
-    <div class="menu-avatar">👤</div>
-    <div>
-      <b id="menuAccountTitle">زائر</b>
-      <small id="menuAccountSub">سجّل الدخول للمتابعة</small>
-    </div>
-  </div>
-  <nav class="menu-links">
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="index.html#games">🎮 الألعاب</a>
-    <a href="index.html#trending">🔥 الألعاب الرائجة</a>
-    <a href="index.html#subscriptions">💎 الاشتراكات</a>
-    <button type="button" id="menuLoginBtn">👤 تسجيل الدخول</button>
-    <button type="button" id="menuLogoutBtn" class="hidden">↩ تسجيل الخروج</button>
-    <a href="admin.html" id="menuAdminLink" class="hidden">🛡️ لوحة المدير</a>
-  </nav>
-</aside>
-
-<main><section class="hero"><div><span class="pill">🔥 ألعاب جماعية أونلاين</span><h1>ألعاب تجمعكم<br><span>عن بُعد</span></h1><p>شخص واحد يشتري اللعبة، ينشئ غرفة، ويرسل الرابط لأصحابه. كل واحد يلعب من جواله.</p><a class="btn primary" href="#games">تصفح الألعاب ←</a></div><div class="hero-art"><div class="floating-card">🕵️<b>مين الكذاب؟</b><small>3–8 لاعبين • 9 ريال</small></div></div></section>
-<section id="games" class="section"><div class="section-head"><h2>الألعاب 🔥</h2></div><div id="gamesGrid" class="grid"></div></section>
-<section id="trending" class="section">
-  <div class="section-head"><h2>الألعاب الرائجة 🔥</h2></div>
-  <div class="panel trending-box"><p class="lead">الألعاب الأكثر جذبًا للاعبين تظهر هنا.</p></div>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070d1d"><title>لعبك | ألعاب جماعية أونلاين</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="nav">
+  <a class="logo" href="index.html"><span class="logo-mark">🎮</span><span>لعبك</span></a>
+  <nav><a class="active" href="index.html">الرئيسية</a><a href="#games">الألعاب</a><a href="#how">كيف تعمل؟</a><a href="#faq">الأسئلة</a></nav>
+  <div class="nav-actions"><a class="btn ghost small" href="admin.html">دخول المشرف</a><button class="menu-btn" onclick="toggleMenu()">☰</button></div>
+</header>
+<div id="mobileMenu" class="mobile-menu hidden"><a href="index.html">🏠 الرئيسية</a><a href="#games" onclick="toggleMenu()">🎮 الألعاب</a><a href="#how" onclick="toggleMenu()">✨ كيف تعمل؟</a><a href="#faq" onclick="toggleMenu()">❓ الأسئلة</a><a href="admin.html">👑 لوحة المشرف</a></div>
+<main>
+<section class="hero wrap">
+  <div class="hero-copy"><span class="pill">🔥 ألعاب جماعية أونلاين</span><h1>اللعب أحلى<br><span>مع جماعتك.</span></h1><p>اشتري لعبة واحدة، أنشئ غرفة وشارك الرابط مع أصحابك. كل شخص يلعب من جواله، بدون تعقيد.</p><div class="hero-actions"><a class="btn primary" href="#games">تصفح الألعاب <b>←</b></a><a class="btn ghost" href="#how">كيف تعمل؟</a></div><div class="trust"><span>⚡ دخول سريع</span><span>👥 لعب جماعي</span><span>📱 يعمل على الجوال</span></div></div>
+  <div class="hero-art"><div class="glow"></div><div class="hero-game-card"><div class="cover purple">🕵️</div><div class="hero-card-info"><span class="tag">الأكثر شعبية</span><b>مين الكذاب؟</b><small>3–8 لاعبين · 9 ريال</small></div></div><div class="float-chip chip-one">🔥 رائج الآن</div><div class="float-chip chip-two">👥 8 لاعبين</div></div>
 </section>
-<section id="subscriptions" class="section">
-  <div class="section-head"><h2>الاشتراكات 💎</h2></div>
-  <div class="grid">
-    <article class="panel subscription-card"><h3>اشتراك شهري</h3><p class="muted">مزايا وعروض للألعاب والاشتراكات.</p><button class="btn primary wide" onclick="alert('سيتم ربط الدفع بعد اختيار بوابة الدفع.')">عرض الاشتراك</button></article>
-    <article class="panel subscription-card"><h3>اشتراك سنوي</h3><p class="muted">خيار سنوي للمستخدمين الدائمين.</p><button class="btn wide" onclick="alert('سيتم ربط الدفع بعد اختيار بوابة الدفع.')">عرض الاشتراك</button></article>
-  </div>
-</section>
+<section class="stats-strip wrap"><div><b>+7</b><span>ألعاب جاهزة</span></div><div><b>1–12</b><span>لاعبين في اللعبة</span></div><div><b>15–30</b><span>دقيقة للعبة</span></div><div><b>24/7</b><span>متاح أونلاين</span></div></section>
+<section id="games" class="section wrap"><div class="section-head"><div><span class="eyebrow">اختَر لعبتك</span><h2>الألعاب الأكثر متعة 🔥</h2><p>ألعاب جماعية وفردية سريعة، مناسبة للجلسات أو إذا كنت لحالك.</p></div></div><div class="game-tools"><div class="search"><span>⌕</span><input id="gameSearch" oninput="filterGames()" placeholder="ابحث عن لعبة..." autocomplete="off"></div><div class="filters"><button class="filter active" data-filter="all" onclick="setGameFilter('all',this)">الكل</button><button class="filter" data-filter="popular" onclick="setGameFilter('popular',this)">🔥 رائج</button><button class="filter" data-filter="quick" onclick="setGameFilter('quick',this)">⚡ سريع</button></div></div><div id="gamesGrid" class="grid"></div><div id="noGames" class="empty hidden">ما لقينا لعبة بهذا الاسم 😅</div></section>
+<section id="how" class="how section"><div class="wrap"><div class="section-head center"><div><span class="eyebrow">بكل بساطة</span><h2>كيف تلعب مع أصحابك؟</h2></div></div><div class="steps"><article><div>1</div><h3>اختر لعبة</h3><p>تصفح الألعاب واختر اللعبة المناسبة لجماعتك.</p></article><article><div>2</div><h3>أنشئ غرفة</h3><p>بعد الشراء تحصل على غرفة خاصة بك وكود مشاركة.</p></article><article><div>3</div><h3>شارك الرابط</h3><p>أرسل الرابط لأصحابك وكل واحد يدخل من جواله.</p></article><article><div>4</div><h3>ابدأ اللعب</h3><p>اجتمعوا وابدؤوا الجولة واستمتعوا باللعبة.</p></article></div></div></section>
+<section class="section wrap"><div class="promo"><div><span class="pill">🎁 قريبًا</span><h2>محتوى جديد باستمرار</h2><p>نضيف ألعابًا وتحديات جديدة حتى كل جلسة تكون مختلفة.</p></div><a class="btn primary" href="#games">شوف الألعاب</a></div></section>
+<section id="faq" class="section wrap"><div class="section-head center"><div><span class="eyebrow">مساعدة</span><h2>أسئلة شائعة</h2></div></div><div class="faq"><details open><summary>هل أحتاج تطبيق؟</summary><p>لا. «لعبك» يعمل من المتصفح على الجوال والكمبيوتر.</p></details><details><summary>هل أصدقائي يحتاجون شراء اللعبة؟</summary><p>في النموذج الحالي، شخص واحد يشتري اللعبة وينشئ الغرفة ثم يدعو أصحابه.</p></details><details><summary>هل الغرف تعمل بين أكثر من جوال؟</summary><p>النسخة الحالية تجريبية. سنفعّل المزامنة الحقيقية بين الأجهزة مع ربط قاعدة البيانات.</p></details></div></section>
 </main>
-<div id="customerLogin" class="modal hidden">
-  <div class="modal-card customer-login-card">
-    <button class="modal-x" id="customerLoginClose">×</button>
-    <div class="logo">🎮 لعبك</div>
-    <h2>دخول العميل</h2>
-    <p class="muted">أدخل رقم جوالك للتعرف على حسابك.</p>
-    <input id="customerPhone" inputmode="tel" autocomplete="tel" placeholder="05xxxxxxxx">
-    <button class="btn primary wide" id="customerLoginSubmit">دخول</button>
-    <small class="login-note">لن يظهر لك قسم المدير؛ المدير يدخل بإيميل المشرف من صفحة لوحة المدير.</small>
-  </div>
-</div>
-<footer>© 2026 لعبك</footer><script src="app.js"></script></body></html>
+<footer><div class="wrap footer-inner"><div><a class="logo" href="index.html"><span class="logo-mark">🎮</span><span>لعبك</span></a><p>اللعب أحلى مع جماعتك.</p></div><div><b>روابط</b><a href="#games">الألعاب</a><a href="#how">كيف تعمل؟</a><a href="#faq">الأسئلة</a></div><div><b>الحساب</b><a href="admin.html">دخول المشرف</a><span>دعم العملاء قريبًا</span></div></div><div class="copyright">© 2026 لعبك · جميع الحقوق محفوظة</div></footer>
+<script src="app.js"></script></body></html>
