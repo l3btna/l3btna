@@ -1,16 +1,30 @@
-## Hi there 👋
+# لعبتنا MVP v2
 
-<!--
-**l3btna/l3btna** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+هذه النسخة تعمل محليًا في المتصفح وتحتوي على:
+- متجر ألعاب
+- صفحة تفاصيل اللعبة
+- شراء تجريبي ينشئ غرفة
+- رابط/كود غرفة
+- لوحة مدير محمية بتسجيل دخول تجريبي
+- إضافة وتعديل وحذف الألعاب
+- إحصائيات المبيعات
+- قائمة مشتريات وغرف
 
-Here are some ideas to get you started:
+## تشغيل
+افتح `index.html` مباشرة.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## دخول المدير التجريبي
+البريد: `admin@l3btna.local`
+كلمة المرور: `123456`
+
+## مهم
+هذه نسخة MVP محلية: البيانات محفوظة في LocalStorage، لذلك ليست متعددة الأجهزة فعليًا بعد.
+لتحويلها إلى موقع حقيقي سنربط:
+1. Supabase Auth
+2. PostgreSQL
+3. Supabase Realtime للغرف
+4. بوابة دفع سعودية
+5. استضافة Vercel
+6. حماية حقيقية لصلاحية Super Admin
+
+لا تستخدم بيانات الدخول التجريبية في موقع منشور.
