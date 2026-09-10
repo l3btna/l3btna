@@ -22,3 +22,45 @@ function closeModal(){document.getElementById("modal").classList.add("hidden")}
 function saveGame(){let d=data(),g={id:editId||("g"+Date.now()),name:document.getElementById("gName").value||"لعبة جديدة",desc:document.getElementById("gDesc").value||"لعبة جماعية جديدة",price:Number(document.getElementById("gPrice").value)||9,players:document.getElementById("gPlayers").value||"3–8",emoji:"🎮",type:"purple"};if(editId){let i=d.games.findIndex(x=>x.id===editId);d.games[i]={...d.games[i],...g}}else d.games.push(g);save(d);closeModal();renderAdmin()}
 function deleteGame(id){if(!confirm("حذف اللعبة؟"))return;let d=data();d.games=d.games.filter(x=>x.id!==id);save(d);renderAdmin()}
 renderGames();renderGame();if(location.pathname.endsWith("room.html"))renderRoom();if(location.pathname.endsWith("admin.html")&&sessionStorage.admin==="1")initAdmin();
+/* Customer account + mobile menu */
+function customerLogin(){
+  const input=document.getElementById("customerPhone");
+  if(!input)return;
+  const phone=input.value.trim().replace(/\s+/g,"");
+  if(!/^05\d{8}$/.test(phone)){alert("اكتب رقم جوال سعودي صحيح مثل 05xxxxxxxx");return}
+  localStorage.setItem("l3btna_customer_phone",phone);
+  updateMenuAccount();
+  closeCustomerLogin();
+}
+function customerLogout(){
+  localStorage.removeItem("l3btna_customer_phone");
+  updateMenuAccount();
+}
+function updateMenuAccount(){
+  const phone=localStorage.getItem("l3btna_customer_phone");
+  const title=document.getElementById("menuAccountTitle");
+  const sub=document.getElementById("menuAccountSub");
+  const login=document.getElementById("menuLoginBtn");
+  const logoutBtn=document.getElementById("menuLogoutBtn");
+  if(title) title.textContent=phone ? "حساب العميل" : "زائر";
+  if(sub) sub.textContent=phone ? phone : "سجّل الدخول للمتابعة";
+  if(login) login.classList.toggle("hidden",!!phone);
+  if(logoutBtn) logoutBtn.classList.toggle("hidden",!phone);
+}
+function openCustomerLogin(){const m=document.getElementById("customerLogin");if(m)m.classList.remove("hidden")}
+function closeCustomerLogin(){const m=document.getElementById("customerLogin");if(m)m.classList.add("hidden")}
+function setupMobileMenu(){
+  const toggle=document.getElementById("menuToggle"), menu=document.getElementById("mobileMenu"), overlay=document.getElementById("menuOverlay"), close=document.getElementById("menuClose");
+  if(!toggle||!menu)return;
+  const setOpen=v=>{menu.classList.toggle("open",v);overlay?.classList.toggle("open",v)};
+  toggle.addEventListener("click",()=>setOpen(true));
+  close?.addEventListener("click",()=>setOpen(false));
+  overlay?.addEventListener("click",()=>setOpen(false));
+  document.querySelectorAll(".menu-links a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));
+  document.getElementById("menuLoginBtn")?.addEventListener("click",()=>{setOpen(false);openCustomerLogin()});
+  document.getElementById("menuLogoutBtn")?.addEventListener("click",()=>{customerLogout();setOpen(false)});
+  document.getElementById("customerLoginClose")?.addEventListener("click",closeCustomerLogin);
+  document.getElementById("customerLoginSubmit")?.addEventListener("click",customerLogin);
+  updateMenuAccount();
+}
+setupMobileMenu();

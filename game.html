@@ -1,1 +1,26 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اللعبة | لعبك</title><link rel="stylesheet" href="styles.css"></head><body><header class="nav"><a class="logo" href="index.html">🎮 لعبك</a><nav><a href="index.html">الرئيسية</a><a class="active" href="index.html#games">الألعاب</a><a href="admin.html">لوحة المدير</a></nav></header><main id="gamePage" class="detail"></main><script src="app.js"></script></body></html>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اللعبة | لعبك</title><link rel="stylesheet" href="styles.css"></head><body><header class="nav"><a class="logo" href="index.html">🎮 لعبك</a><nav><a href="index.html">الرئيسية</a><a class="active" href="index.html#games">الألعاب</a><a href="admin.html">لوحة المدير</a></nav></header>
+<button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">☰</button>
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-head">
+    <strong>🎮 لعبك</strong>
+    <button class="menu-close" id="menuClose" aria-label="إغلاق">×</button>
+  </div>
+  <div class="menu-account" id="menuAccount">
+    <div class="menu-avatar">👤</div>
+    <div>
+      <b id="menuAccountTitle">زائر</b>
+      <small id="menuAccountSub">سجّل الدخول للمتابعة</small>
+    </div>
+  </div>
+  <nav class="menu-links">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="index.html#games">🎮 الألعاب</a>
+    <a href="index.html#trending">🔥 الألعاب الرائجة</a>
+    <a href="index.html#subscriptions">💎 الاشتراكات</a>
+    <button type="button" id="menuLoginBtn">👤 تسجيل الدخول</button>
+    <button type="button" id="menuLogoutBtn" class="hidden">↩ تسجيل الخروج</button>
+    <a href="admin.html" id="menuAdminLink" class="hidden">🛡️ لوحة المدير</a>
+  </nav>
+</aside>
+<main id="gamePage" class="detail"></main><script src="app.js"></script></body></html>

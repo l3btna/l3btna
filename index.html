@@ -1,4 +1,53 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لعبك</title><link rel="stylesheet" href="styles.css"></head>
 <body><header class="nav"><a class="logo" href="index.html">🎮 لعبك</a><nav><a class="active" href="index.html">الرئيسية</a><a href="#games">الألعاب</a><a href="admin.html">لوحة المدير</a></nav></header>
+<button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">☰</button>
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-head">
+    <strong>🎮 لعبك</strong>
+    <button class="menu-close" id="menuClose" aria-label="إغلاق">×</button>
+  </div>
+  <div class="menu-account" id="menuAccount">
+    <div class="menu-avatar">👤</div>
+    <div>
+      <b id="menuAccountTitle">زائر</b>
+      <small id="menuAccountSub">سجّل الدخول للمتابعة</small>
+    </div>
+  </div>
+  <nav class="menu-links">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="index.html#games">🎮 الألعاب</a>
+    <a href="index.html#trending">🔥 الألعاب الرائجة</a>
+    <a href="index.html#subscriptions">💎 الاشتراكات</a>
+    <button type="button" id="menuLoginBtn">👤 تسجيل الدخول</button>
+    <button type="button" id="menuLogoutBtn" class="hidden">↩ تسجيل الخروج</button>
+    <a href="admin.html" id="menuAdminLink" class="hidden">🛡️ لوحة المدير</a>
+  </nav>
+</aside>
+
 <main><section class="hero"><div><span class="pill">🔥 ألعاب جماعية أونلاين</span><h1>ألعاب تجمعكم<br><span>عن بُعد</span></h1><p>شخص واحد يشتري اللعبة، ينشئ غرفة، ويرسل الرابط لأصحابه. كل واحد يلعب من جواله.</p><a class="btn primary" href="#games">تصفح الألعاب ←</a></div><div class="hero-art"><div class="floating-card">🕵️<b>مين الكذاب؟</b><small>3–8 لاعبين • 9 ريال</small></div></div></section>
-<section id="games" class="section"><div class="section-head"><h2>الألعاب 🔥</h2></div><div id="gamesGrid" class="grid"></div></section></main><footer>© 2026 لعبك</footer><script src="app.js"></script></body></html>
+<section id="games" class="section"><div class="section-head"><h2>الألعاب 🔥</h2></div><div id="gamesGrid" class="grid"></div></section>
+<section id="trending" class="section">
+  <div class="section-head"><h2>الألعاب الرائجة 🔥</h2></div>
+  <div class="panel trending-box"><p class="lead">الألعاب الأكثر جذبًا للاعبين تظهر هنا.</p></div>
+</section>
+<section id="subscriptions" class="section">
+  <div class="section-head"><h2>الاشتراكات 💎</h2></div>
+  <div class="grid">
+    <article class="panel subscription-card"><h3>اشتراك شهري</h3><p class="muted">مزايا وعروض للألعاب والاشتراكات.</p><button class="btn primary wide" onclick="alert('سيتم ربط الدفع بعد اختيار بوابة الدفع.')">عرض الاشتراك</button></article>
+    <article class="panel subscription-card"><h3>اشتراك سنوي</h3><p class="muted">خيار سنوي للمستخدمين الدائمين.</p><button class="btn wide" onclick="alert('سيتم ربط الدفع بعد اختيار بوابة الدفع.')">عرض الاشتراك</button></article>
+  </div>
+</section>
+</main>
+<div id="customerLogin" class="modal hidden">
+  <div class="modal-card customer-login-card">
+    <button class="modal-x" id="customerLoginClose">×</button>
+    <div class="logo">🎮 لعبك</div>
+    <h2>دخول العميل</h2>
+    <p class="muted">أدخل رقم جوالك للتعرف على حسابك.</p>
+    <input id="customerPhone" inputmode="tel" autocomplete="tel" placeholder="05xxxxxxxx">
+    <button class="btn primary wide" id="customerLoginSubmit">دخول</button>
+    <small class="login-note">لن يظهر لك قسم المدير؛ المدير يدخل بإيميل المشرف من صفحة لوحة المدير.</small>
+  </div>
+</div>
+<footer>© 2026 لعبك</footer><script src="app.js"></script></body></html>
